@@ -1,0 +1,44 @@
+name: video-library
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-videolib}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-videolib}
+      POSTGRES_DB: ${POSTGRES_DB:-videolib}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-videolib} -d ${POSTGRES_DB:-videolib}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-videolib}:${POSTGRES_PASSWORD:-videolib}@db:5432/${POSTGRES_DB:-videolib}
+      VIDEO_ROOT: /data/video-library
+      PORT: 4000
+    volumes:
+      # Physical video library folder at the root of the project (read-only)
+      - ./video-library:/data/video-library:ro
+    ports:
+      - "${API_PORT:-4000}:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./client
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-8080}:80"
+    depends_on:
+      - server
+
+volumes:
+  pgdata:

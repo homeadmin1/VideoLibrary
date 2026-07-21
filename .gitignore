@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Builds
+dist/
+build/
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Video content (managed outside git)
+video-library/**/*.mp4
+video-library/**/*.webm
+video-library/**/*.mov
+video-library/**/*.mkv
+video-library/**/*.avi
+video-library/**/*.m4v
+video-library/**/*.ogv
