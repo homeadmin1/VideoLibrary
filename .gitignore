@@ -23,3 +23,10 @@ video-library/**/*.mkv
 video-library/**/*.avi
 video-library/**/*.m4v
 video-library/**/*.ogv
+
+# claude.md (personal use only)
+claude.md
+
+# vs-workspace (personal use only)
+*.code-workspace    
+
