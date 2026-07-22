@@ -68,18 +68,21 @@ export default function VideoModal({ video, onClose, onVideoChange }: Props) {
           src={streamUrl(video.id)}
           controls
           autoPlay
+          loop
+          playsInline
           onPlay={handlePlay}
         />
 
         <div className="modal-info">
           <h2>{video.title}</h2>
+          <p className="modal-category">
+            {video.category_path
+              ? video.category_path.split('/').join(' -> ')
+              : 'Uncategorized'}
+          </p>
           {video.description && <p className="description">{video.description}</p>}
 
           <div className="metadata-grid">
-            <div>
-              <label>Category</label>
-              <span>{video.category_path || 'Uncategorized'}</span>
-            </div>
             <div>
               <label>Duration</label>
               <span>{formatDuration(video.duration_seconds)}</span>
@@ -98,7 +101,9 @@ export default function VideoModal({ video, onClose, onVideoChange }: Props) {
             </div>
             <div>
               <label>File</label>
-              <span className="file-path">{video.file_path}</span>
+              <span className="file-path">
+                {video.file_path.split(/[\\/]/).pop()}
+              </span>
             </div>
           </div>
 
@@ -127,6 +132,9 @@ export default function VideoModal({ video, onClose, onVideoChange }: Props) {
               onClick={handleFavorite}
             >
               {video.favorite ? '★ In favorites' : '☆ Add to favorites'}
+            </button>
+            <button className="btn close-btn" onClick={onClose}>
+              ✕ Close
             </button>
           </div>
         </div>

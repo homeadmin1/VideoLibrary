@@ -7,6 +7,7 @@ User can preview each video by hovering the mouse on each video.
 All videos are tagged and categorized, mainly using the name of the folder and subfolder where the videos are physically located.
 Modern web design let the user search by many properties of the metadata for the videos.
 Each video has tools to view en full screen, download on local drive and everything operation that can be done in a video library on line.
+The videos, when opened as a pop up or a full screen are played with loop. A close bottom close the pop up windows with the video playing. This is because sometime in the mobile version tapping outside the popup to close is not possible.
 Also the user can give a like to the video and add to favorites.
 A vertical view tree of the category in the main site allow user see all videos related with that particular category.
 At the end of the vertical menu at the left, must be a cloud of words with the tags already set in each video, giving the change to the user that selecting a tag in the cloud of words bring all videos associated.
